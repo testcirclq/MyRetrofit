@@ -1,22 +1,30 @@
-#前言
-Retrofit的简洁，用过的人都是赞不绝口，然而我们的目标是更加简洁，不同请求类型，只需要粘贴复制即可。
-#依赖
-   compile 'com.yanxuwen.retrofit:retrofit:1.0.7'
-#目录结构
+前言
 
-![image.png](http://upload-images.jianshu.io/upload_images/6835615-13e6e1fc2a36f1c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+Retrofit的简洁，用过的人都是赞不绝口，然而我们的目标是更加简洁，不同请求类型，只需要粘贴复制即可。
+
+依赖
+
+compile 'com.yanxuwen.retrofit:retrofit:1.0.7'
+
+目录结构
+
+
+image.png
+
 我们可以看到“Token请求”跟“版本更新请求”2个接口分的很明显，添加别的接口的时候，像这样写法写，就可以很方便的查看我们的哪个接口。
-#首先先介绍3个最基本的父类MyBaseModel,MyBaseRequest,MyBaseTask
-#####MyBaseModel:
+
+首先先介绍3个最基本的父类MyBaseModel,MyBaseRequest,MyBaseTask
+
+MyBaseModel:
+
 添加你公司通用的返回字段，如status跟message等字段，
-~~~
+
 public class MyBaseModel extends BaseModel {
 }
-~~~
 这里没有写任何字段是因为在BaseModel 已经写好了这2个字段，如果你们公司不是这2个字段，则在MyBaseModel添加你需要的字段【注意：是通用的返回字段，不是Token返回的所有字段】
 
-#####MyBaseRequest:
-~~~
+MyBaseRequest:
+
 public class MyBaseRequest extends BaseRequest {
     public String access_token;
     public String uid;
@@ -36,12 +44,11 @@ public class MyBaseRequest extends BaseRequest {
     }
 
 }
-~~~
 自动为每个接口添加“版本号”，“设备类型”，“app类型”，这样我们不用每次请求都添加一般，减少繁琐，
 【注意：只适合post请求，get请求无法自动添加。】
 
-#####MyBaseTask:
-~~~
+MyBaseTask:
+
 public class MyBaseTask extends BaseTask {
 
     public LoadingDialog loadview;
@@ -130,12 +137,12 @@ public class MyBaseTask extends BaseTask {
         return true;
     }
 }
-
-~~~
 配置这里都写得很清楚，不懂的直接复制就可以，到时候在联系本人，我会很详细的介绍。
-#####配置好3个base后，我们还需要在配置下BaseActivity，与application
+
+配置好3个base后，我们还需要在配置下BaseActivity，与application
+
 BaseActivity
-~~~
+
 public class BaseActivity extends AppCompatActivity implements ObserverListener {
     public RequestUtils mRequestUtils;
     @Override
@@ -176,25 +183,23 @@ public class BaseActivity extends AppCompatActivity implements ObserverListener 
     public void onNotifyData(STATUS status, String type, Object object) {
     }
 }
-
-~~~
 application,只是简单的初始化而已，初始化传递baseurl而已
-~~~
+
   ApiManager.init(ConfigUtils.BASE_URL);
   ApiManager.initHttpsType(ApiManager.HttpType.HTTP);
-~~~
-#好了，配置好4个base后，我们就可以一个简单的请求。也许很多人已经迷茫了，4个base都看不懂，没关系，来找我，我会很详细的给你介绍，弄懂后，要网络请求真的比你想象中的还要简单。
+好了，配置好4个base后，我们就可以一个简单的请求。也许很多人已经迷茫了，4个base都看不懂，没关系，来找我，我会很详细的给你介绍，弄懂后，要网络请求真的比你想象中的还要简单。
+
+我们先来看下Token包下的结构：
 
 
-#我们先来看下Token包下的结构：
+image.png
 
-![image.png](http://upload-images.jianshu.io/upload_images/6835615-923ba14a3a09d35d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 我们可以看到其实就是继承上面的3个base而已。
 
-#####请求体跟返回体，我们就不多介绍了，主要介绍下TokenApi跟TokenTask
+请求体跟返回体，我们就不多介绍了，主要介绍下TokenApi跟TokenTask
 
-#####TokenApi，这里就不需要多介绍了，用过的人一看就知道，这里就贴代码给大家看就会，
-~~~
+TokenApi，这里就不需要多介绍了，用过的人一看就知道，这里就贴代码给大家看就会，
+
 /**
  * Token接口
  * @Description("")尽量设置描述，以便方便查询已经log的打印
@@ -207,15 +212,15 @@ public interface TokenApi   {
     @POST(url)
     public abstract Observable<String> postman(@Body RequestBody description);
 }
-~~~
 【主意：Description，强烈建议4个类都需要添加Description注解，因为这样我们在请求过程中，会自动打印显示哪个请求执行了什么。如下： 】
 
 
-![image.png](http://upload-images.jianshu.io/upload_images/6835615-2b8cb67661a3fdd0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+image.png
+
 看到没哪个接口执行了什么，请求地址，请求参数，返回参数都会自动打印出来，这样容易根据我们需要的数据。是不是很爽。
 
-#####TokenTask，这里也不多介绍了，一些方法介绍都在他的父类，看一下就知道，唯一一个就是【动态添加头部】
-~~~
+TokenTask，这里也不多介绍了，一些方法介绍都在他的父类，看一下就知道，唯一一个就是【动态添加头部】
+
 public class TokenTask extends MyBaseTask {
     TokenBuild mBuild;
     public TokenTask(Activity context) {
@@ -274,10 +279,8 @@ public class TokenTask extends MyBaseTask {
 //        return map;
 //    }
 }
-~~~
+好了这样我们请求写完了，只要在Activity上调用 mRequestUtils.requestToken();就可以执行Token请求了，，然后重载onNotifyData，如下代码，由于我们配置了BaseActivity，所以请求完成后就会自动调用了本类Activity的onNotifyData方法，Msg.TOKEN就是token返回的数据，Msg.VERSION:就是版本更新返回的数据
 
-#####好了这样我们请求写完了，只要在Activity上调用  mRequestUtils.requestToken();就可以执行Token请求了，，然后重载onNotifyData，如下代码，由于我们配置了BaseActivity，所以请求完成后就会自动调用了本类Activity的onNotifyData方法，Msg.TOKEN就是token返回的数据，Msg.VERSION:就是版本更新返回的数据
-~~~
  /**
      * 请求数据返回结果
      *
@@ -308,6 +311,6 @@ public class TokenTask extends MyBaseTask {
         }
         super.onNotifyData(status, type, object);
     }
-~~~
-#github   https://github.com/yanxuwen/MyRetrofit.git
-#有什么问题欢迎加qq:420255048咨询
+github https://github.com/yanxuwen/MyRetrofit.git
+
+有什么问题欢迎加qq:420255048咨询

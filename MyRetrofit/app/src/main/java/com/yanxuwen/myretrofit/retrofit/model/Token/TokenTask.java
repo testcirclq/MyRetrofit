@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.yanxuwen.myretrofit.retrofit.Msg.Msg;
 import com.yanxuwen.myretrofit.retrofit.MyBaseRequest;
 import com.yanxuwen.myretrofit.retrofit.MyBaseTask;
+import com.yanxuwen.retrofit.Msg.ObserverListener;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -19,8 +20,8 @@ import rx.Observable;
  */
 public class TokenTask extends MyBaseTask {
     TokenBuild mBuild;
-    public TokenTask(Activity context) {
-        super(context);
+    public TokenTask(Activity context,ObserverListener ob) {
+        super(context,ob);
         //执行传递参数
         mBuild =new TokenBuild(context);
         mBuild.setAccess_token("QcTfVgAAAAAHALMfqOxKcR8pHctCebKcxktS");

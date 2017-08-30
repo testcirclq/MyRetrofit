@@ -15,15 +15,17 @@ import com.yanxuwen.retrofit.Msg.Publisher;
 
 public class BaseActivity extends AppCompatActivity implements ObserverListener {
     public RequestUtils mRequestUtils;
+    public Publisher mPublisher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mRequestUtils=new RequestUtils(this);
+        mPublisher=new Publisher();
+        mRequestUtils=new RequestUtils(this,this);
+        //添加观察者
+        mPublisher.setOb(this);
     }
     protected void onResume() {
-        //添加观察者
-        Publisher.getInstance().addOb(this);
+
         super.onResume();
     }
 
@@ -31,7 +33,7 @@ public class BaseActivity extends AppCompatActivity implements ObserverListener 
     protected void onDestroy() {
         super.onDestroy();
         //移除观察者
-        Publisher.getInstance().removeOb(this);
+        mPublisher.removeOb();
     }
     /**
      * 判断数据请求是否是失败

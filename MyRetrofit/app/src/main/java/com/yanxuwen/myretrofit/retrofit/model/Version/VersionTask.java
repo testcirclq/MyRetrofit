@@ -6,6 +6,7 @@ import android.util.Log;
 import com.yanxuwen.myretrofit.retrofit.Msg.Msg;
 import com.yanxuwen.myretrofit.retrofit.MyBaseRequest;
 import com.yanxuwen.myretrofit.retrofit.MyBaseTask;
+import com.yanxuwen.retrofit.Msg.ObserverListener;
 
 import java.lang.reflect.Type;
 
@@ -18,8 +19,8 @@ import rx.Observable;
 public class VersionTask extends MyBaseTask {
     VersionBuild mBuild;
     Activity context;
-    public VersionTask(Activity context) {
-        super(context);
+    public VersionTask(Activity context,ObserverListener ob) {
+        super(context,ob);
         this.context=context;
         mBuild=new VersionBuild(context);
         mBuild.setVersion("3.5.0");

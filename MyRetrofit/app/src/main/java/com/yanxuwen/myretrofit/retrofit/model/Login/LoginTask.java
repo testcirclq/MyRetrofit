@@ -9,6 +9,7 @@ import com.yanxuwen.myretrofit.retrofit.MyBaseTask;
 import com.yanxuwen.myretrofit.retrofit.model.Login.Login;
 import com.yanxuwen.myretrofit.retrofit.model.Login.LoginApi;
 import com.yanxuwen.myretrofit.retrofit.model.Login.LoginBuild;
+import com.yanxuwen.retrofit.Msg.ObserverListener;
 
 import java.lang.reflect.Type;
 
@@ -20,8 +21,8 @@ import rx.Observable;
 
 public class LoginTask extends MyBaseTask {
     LoginBuild mBuild;
-    public LoginTask(Activity context) {
-        super(context);
+    public LoginTask(Activity context,ObserverListener ob) {
+        super(context,ob);
         //执行传递参数
         mBuild =new LoginBuild(context);
         mBuild.setMobile("15060568265");

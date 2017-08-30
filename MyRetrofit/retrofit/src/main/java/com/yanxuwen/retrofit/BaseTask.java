@@ -45,9 +45,10 @@ public abstract class BaseTask {
     private Observable<String> mObservable;
     private RequestBody description;
     public   Context context;
-    public BaseTask(Context context){
+    public BaseTask(Context context,ObserverListener ob){
         this.context = context;
-        mPublisher=Publisher.getInstance();
+        mPublisher=new Publisher();
+        this.ob=ob;
     }
 
     /**
@@ -112,11 +113,19 @@ public abstract class BaseTask {
                                     Response<?> mResponse = httpException.response();
                                     String errorBody= mResponse.errorBody().string();
                                     mBaseModel.status=code;
-                                    mBaseModel.message=errorBody;
+                                    String message=errorBody;
+                                    Object object=GsonUtils.fromJson(errorBody,BaseModel.class);
+                                    if(object!=null&&(BaseModel)object!=null&&((BaseModel) object).getMessage()!=null){
+                                        message=((BaseModel) object).getMessage();
+                                    }
+                                    mBaseModel.message=message;
                                     ProcessData(ObserverListener.STATUS.FAIL, mBaseModel);
                                 }catch (Exception e2){}
+                            }else{
+                                mBaseModel.status=e.hashCode();
+                                mBaseModel.message= e.getMessage();
+                                ProcessData(ObserverListener.STATUS.ERROR,mBaseModel);
                             }
-
                         }else{
                             mBaseModel.status=e.hashCode();
                             mBaseModel.message= e.getMessage();

@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
                 if(object!=null){
                     Login mLogin=(Login)object;
                     if(mLogin!=null){
-                        tv_text.setText("请求结果:"+mLogin.getData().getMobile());
+                        tv_text.setText("请求结果:"+mLogin.getAccess_token());
                     }
                 }
                 return;

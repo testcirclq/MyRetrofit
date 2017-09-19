@@ -29,6 +29,8 @@ public class MyBaseTask extends BaseTask {
         super(context,ob);
         //如果你们公司是根据status字段在判断是否成功，则你可以直接传入0，代表返回0则成功，其他状态为失败
         setSuccessConditionCode(0);
+        //如果你们公司是根据HTTP异常来判断是否成功，则可以传入指定失败的code进去，
+//        onHttpFailConditionCode(API_ERROR_CODE);
         //实例化加载框，这里使用的是我的加载框，你们可以根据你的加载框进行实例化
         loadview=new LoadingDialog(context,500);
     }

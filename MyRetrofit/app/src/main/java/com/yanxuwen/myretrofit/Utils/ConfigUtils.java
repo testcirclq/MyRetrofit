@@ -5,5 +5,5 @@ package com.yanxuwen.myretrofit.Utils;
  */
 
 public class ConfigUtils {
-    public static String BASE_URL="http://cms.sdwhcn.com/";
+    public static String BASE_URL="http://api.sdwhcn.com:5056/v1/";
 }

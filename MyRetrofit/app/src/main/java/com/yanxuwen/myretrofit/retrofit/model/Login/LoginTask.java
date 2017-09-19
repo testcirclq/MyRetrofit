@@ -1,14 +1,11 @@
 package com.yanxuwen.myretrofit.retrofit.model.Login;
 
 import android.app.Activity;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.yanxuwen.myretrofit.retrofit.Msg.Msg;
-import com.yanxuwen.myretrofit.retrofit.MyBaseRequest;
 import com.yanxuwen.myretrofit.retrofit.MyBaseTask;
-import com.yanxuwen.myretrofit.retrofit.model.Login.Login;
-import com.yanxuwen.myretrofit.retrofit.model.Login.LoginApi;
-import com.yanxuwen.myretrofit.retrofit.model.Login.LoginBuild;
+import com.yanxuwen.retrofit.BaseRequest;
 import com.yanxuwen.retrofit.Msg.ObserverListener;
 
 import java.lang.reflect.Type;
@@ -16,21 +13,25 @@ import java.lang.reflect.Type;
 import rx.Observable;
 
 /**
- * Created by yanxuwen on 2017/7/21.
+ * Created by yanxuwen on 2017/5/26.
  */
 
 public class LoginTask extends MyBaseTask {
+    Integer API_ERROR_CODE[]={401,422/**,422,422,422*/,500};
+    String  API_ERROR_ERROR[]={"InvalidCredentials","TheUsernameFieldIsRequired","TheUsernameFormatIsInvalid","TheSelectedUsernameDoesNotExist","ThePasswordFieldIsRequired","ServerError"};
+    String  API_ERROR_MSG[]={"密码错误","用户名不能为空","用户名格式错误","用户名不存在","密码不能为空","服务器错误"};
+
     LoginBuild mBuild;
-    public LoginTask(Activity context,ObserverListener ob) {
+    public LoginTask(Activity context, ObserverListener ob) {
         super(context,ob);
-        //执行传递参数
+        onHttpFailConditionCode(API_ERROR_CODE);
         mBuild =new LoginBuild(context);
-        mBuild.setMobile("15060568265");
-        mBuild.setPassword("e10adc3949ba59abbe56e057f20f883e");
+        mBuild.setUsername("15060568265");
+        mBuild.setPassword("123456");
     }
     @Override
     public Observable<String> getObservable() {
-        return  ((LoginApi)getBaseApi()).postman(getRequestBody());
+        return  ((LoginApi)getBaseApi()).onPostman(getRequestBody());
     }
     @Override
     public boolean isEncrypt() {
@@ -43,7 +44,7 @@ public class LoginTask extends MyBaseTask {
 
     @Override
     public boolean isToast() {
-        return true;
+        return false;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class LoginTask extends MyBaseTask {
         return Msg.LOGIN;
     }
     @Override
-    public MyBaseRequest requestClass() {
+    public BaseRequest requestClass() {
         return mBuild;
     }
     @Override
@@ -61,14 +62,22 @@ public class LoginTask extends MyBaseTask {
     @Override
     public void onCompleted() {}
     @Override
-    public void onError(Object object) {
-        Log.e("xxx","登录失败");
-    }
+    public void onError(Object object) {}
     @Override
-    public void onSuccess(Object object) {
-        Log.e("xxx","登录成功");
-    }
+    public void onSuccess(Object object) {}
     @Override
-    public void onFail(Object object) {}
+    public void onFail(Object object) {
+        if(object!=null){
+            Login login=(Login)object;
+            if(login!=null&&login.getError()!=null){
+                for(int i=0;i<API_ERROR_ERROR.length-1;i++){
+                    if(login.getError().equals(API_ERROR_ERROR[i])){
+                        Toast.makeText(context,API_ERROR_MSG[i],Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+            }
+        }
+    }
 }
 

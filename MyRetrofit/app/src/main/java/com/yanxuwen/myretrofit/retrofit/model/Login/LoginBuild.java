@@ -6,28 +6,28 @@ import com.yanxuwen.myretrofit.retrofit.MyBaseRequest;
 import com.yanxuwen.retrofit.Annotation.Description;
 
 /**
- * Created by yanxuwen on 2017/7/21.
+ * Created by yanxuwen on 2017/5/26.
  */
 @Description("登录")
 public class LoginBuild extends MyBaseRequest {
     /**
-     * mobile :
-     * password :
+     * username :xxx
+     * password :xxx
      */
-
-    private String mobile;
+    private String username;
     private String password;
 
     public LoginBuild(Context context) {
         super(context);
+        // TODO Auto-generated constructor stub
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getUsername() {
+        return username;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

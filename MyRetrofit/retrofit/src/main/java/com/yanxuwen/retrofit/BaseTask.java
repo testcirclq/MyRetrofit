@@ -112,21 +112,26 @@ public abstract class BaseTask {
                                 try {
                                     Response<?> mResponse = httpException.response();
                                     String errorBody= mResponse.errorBody().string();
-                                    mBaseModel.status=code;
                                     String message=errorBody;
-                                    Object object=GsonUtils.fromJson(errorBody,BaseModel.class);
+                                    Object object=GsonUtils.fromJson(errorBody,returnClass());
                                     if(object!=null&&(BaseModel)object!=null&&((BaseModel) object).getMessage()!=null){
                                         message=((BaseModel) object).getMessage();
                                     }
+                                    mBaseModel= (BaseModel)object;
                                     mBaseModel.message=message;
+                                    mBaseModel.status=code;
                                     ProcessData(ObserverListener.STATUS.FAIL, mBaseModel);
                                 }catch (Exception e2){}
                             }else{
+                                Object object=GsonUtils.fromJson("{}",returnClass());
+                                mBaseModel= (BaseModel)object;
                                 mBaseModel.status=e.hashCode();
                                 mBaseModel.message= e.getMessage();
                                 ProcessData(ObserverListener.STATUS.ERROR,mBaseModel);
                             }
                         }else{
+                            Object object=GsonUtils.fromJson("{}",returnClass());
+                            mBaseModel= (BaseModel)object;
                             mBaseModel.status=e.hashCode();
                             mBaseModel.message= e.getMessage();
                             ProcessData(ObserverListener.STATUS.ERROR,mBaseModel);

@@ -1,312 +1,55 @@
 package com.yanxuwen.myretrofit.retrofit.model.Login;
 
-import com.google.gson.annotations.SerializedName;
+
 import com.yanxuwen.myretrofit.retrofit.MyBaseModel;
-import com.yanxuwen.retrofit.Annotation.Description;
 
 /**
- * Created by yanxuwen on 2017/7/21.
+ * Created by yanxuwen on 2017/5/26.
  */
-@Description("登录")
+
 public class Login extends MyBaseModel {
+
     /**
-     * data : {"id":32,"username":"15060568265","nickname":"默默嗯","realname":"","email":"","mobile":"15060568265","signature":"嗯噢噢噢哦哦","thumb":"http://59.57.240.50/storage/avatars/default.png","temple_follows":"","monk_follows":"","birthday":"0000-00-00","source":0,"gender":1,"generation":"80","pious":74,"level":1,"province_id":"820000","city_id":"652700","district_id":"652723","balance":"0.00","last_login":"0000-00-00 00:00:00","status":0,"created_at":"2017-05-26 19:57:06","updated_at":"2017-07-21 17:42:03","location_name":"澳门特别行政区博尔塔拉蒙古自治州","points_difference":26,"is_check_in":1,"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMyLCJpc3MiOiJodHRwOlwvXC9jbXMuc2R3aGNuLmNvbVwvYXBpXC9tZW1iZXJcL2xvZ2luIiwiaWF0IjoxNTAwNjMwMTY5LCJleHAiOjE1MDE4Mzk3NjksIm5iZiI6MTUwMDYzMDE2OSwianRpIjoiYjdud1BUVjBNdTVLc1M5diJ9.PUpyLYi55RpOM9-b6vvy6dX7_KoQB_FcWwnXSmKVCuQ"}
+     * token_type : Bearer
+     * expires_in : 1296000
+     * access_token : eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQ2NjViY2E1NjFhNmVkZmY5ZWM5NGI2NmQ5YjZiYTFjYWZiZWZkZTE4MThiOWE1ZTA3OGYyNTAwYjg4MjUzOGZmY2ZmMmJiNmZkODA0OThkIn0.eyJhdWQiOiIyIiwianRpIjoiZDY2NWJjYTU2MWE2ZWRmZjllYzk0YjY2ZDliNmJhMWNhZmJlZmRlMTgxOGI5YTVlMDc4ZjI1MDBiODgyNTM4ZmZjZmYyYmI2ZmQ4MDQ5OGQiLCJpYXQiOjE1MDU0NTY3NTUsIm5iZiI6MTUwNTQ1Njc1NSwiZXhwIjoxNTA2NzUyNzU1LCJzdWIiOiI2NSIsInNjb3BlcyI6W119.Y8iA4oh32pr38TB5vvG8Gh1R6AxzFc0Tj6uExwRMCe-GMqi5BX72Gw1uYcVFQudtQKMjwx1VEXgIYuiWE1Ndyedm5wajFAjfMH1h65lN48T_UpxTzvNbl9W81z1lGv3H1X3L8jJyNniZI2XBl3D_7QwoW-m9-Trd2daZ6q_Yj6VOK5mtHHXO7OQfekvytG7G4W0OyqrHUhrr_YewEjzFY165xpXh7GvAvQFWAAddxUHiWEuVoQH5JJx4YHwOqfdLYgLBYHTop-Ov_hX7xbxQ2yNXbnFPIgcIRyF1XBqvK8Y9ry0msIzzxNx7ObsNE0GnGyH_j3opbvMLHkcavQcuzKwcGimkARXXi1_kG3FfHeeA4zs8A4urHEUbDhFSycX1_lCKYw0MwNi8RYml-eUS5ysightvDztfXbPSaFV-RiIPQYo1sohteR6RSNb2SMwfCBgJdc3M2ClJho5TG-Ho6SFyrhiq51PJeRtmhdAEiBZCXVDYkcc8yH7PbtZ5vcgto0p5iofjPsyksvSjnd01N99u-OsdwTmino-fOJFetw-QQ6PlaELThO0ow9vnkACaj3oS7gsdq5uDQWoU0mgazl5cOtEbY5nriaqmUHM20xckENioXYWbij7Vebh7HpztyjnD41TTxalT5oXtOGDKTPNqcP-XnbtkXOeu5Qh9M1A
+     * refresh_token : def50200e1d8957191c1f625dcf960b6bc6e45644d19e3a5f7a94f5ffddeb5273bf1963ab6c8ca834f63dca2fccb146451262c4ca0185f8eb891de6dbcd10054b9c6b4724fa6c2294b078d8cea0cc121f469079a18d2d6cee90516cdccd92d2e1ee2cbeb46ac6ac709f124da657bcbb800a876be4411c4101e90382ab1461a8ddca8f74673861e9aaae03eb79fe05ea265a3a4480c85fadb2faa791506adaff519145081e410ba066e223d3eac3e953e65ddf2fe48849f4f4f691144523b0c9f8a8acd8373f4066414a193cc697bb5d3fc8d69238b67c3c6d052fe68ff152455e29b69cbbe6cbd02c74dfcc7d48d240f9c1a8996732f52fc6523a6b7fa0ddf92d0eaa00b416b6ee456e35f9ca4a6e9631f5d259c69d04781db3d7ec86c8dbcb13d0cb2b2d2ce7671f6dbf3a25563029d60d7677074d7be825736f370471b7491bb6b08f2fbecbb220f47b497484566f6c06312c88b70a6899dfff9c71459513d
      */
 
-    private DataBean data;
+    private String token_type;
+    private int expires_in;
+    private String access_token;
+    private String refresh_token;
 
-    public DataBean getData() {
-        return data;
+    public String getToken_type() {
+        return token_type;
     }
 
-    public void setData(DataBean data) {
-        this.data = data;
+    public void setToken_type(String token_type) {
+        this.token_type = token_type;
     }
 
-    public static class DataBean {
-        /**
-         * id : 32
-         * username : 15060568265
-         * nickname : 默默嗯
-         * realname :
-         * email :
-         * mobile : 15060568265
-         * signature : 嗯噢噢噢哦哦
-         * thumb : http://59.57.240.50/storage/avatars/default.png
-         * temple_follows :
-         * monk_follows :
-         * birthday : 0000-00-00
-         * source : 0
-         * gender : 1
-         * generation : 80
-         * pious : 74
-         * level : 1
-         * province_id : 820000
-         * city_id : 652700
-         * district_id : 652723
-         * balance : 0.00
-         * last_login : 0000-00-00 00:00:00
-         * status : 0
-         * created_at : 2017-05-26 19:57:06
-         * updated_at : 2017-07-21 17:42:03
-         * location_name : 澳门特别行政区博尔塔拉蒙古自治州
-         * points_difference : 26
-         * is_check_in : 1
-         * token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMyLCJpc3MiOiJodHRwOlwvXC9jbXMuc2R3aGNuLmNvbVwvYXBpXC9tZW1iZXJcL2xvZ2luIiwiaWF0IjoxNTAwNjMwMTY5LCJleHAiOjE1MDE4Mzk3NjksIm5iZiI6MTUwMDYzMDE2OSwianRpIjoiYjdud1BUVjBNdTVLc1M5diJ9.PUpyLYi55RpOM9-b6vvy6dX7_KoQB_FcWwnXSmKVCuQ
-         */
+    public int getExpires_in() {
+        return expires_in;
+    }
 
-        private int id;
-        private String username;
-        private String nickname;
-        private String realname;
-        private String email;
-        private String mobile;
-        private String signature;
-        private String thumb;
-        private String temple_follows;
-        private String monk_follows;
-        private String birthday;
-        private int source;
-        private int gender;
-        private String generation;
-        private int pious;
-        private int level;
-        private String province_id;
-        private String city_id;
-        private String district_id;
-        private String balance;
-        private String last_login;
-        @SerializedName("status")
-        private int statusX;
-        private String created_at;
-        private String updated_at;
-        private String location_name;
-        private int points_difference;
-        private int is_check_in;
-        private String token;
+    public void setExpires_in(int expires_in) {
+        this.expires_in = expires_in;
+    }
 
-        public int getId() {
-            return id;
-        }
+    public String getAccess_token() {
+        return access_token;
+    }
 
-        public void setId(int id) {
-            this.id = id;
-        }
+    public void setAccess_token(String access_token) {
+        this.access_token = access_token;
+    }
 
-        public String getUsername() {
-            return username;
-        }
+    public String getRefresh_token() {
+        return refresh_token;
+    }
 
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getNickname() {
-            return nickname;
-        }
-
-        public void setNickname(String nickname) {
-            this.nickname = nickname;
-        }
-
-        public String getRealname() {
-            return realname;
-        }
-
-        public void setRealname(String realname) {
-            this.realname = realname;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getMobile() {
-            return mobile;
-        }
-
-        public void setMobile(String mobile) {
-            this.mobile = mobile;
-        }
-
-        public String getSignature() {
-            return signature;
-        }
-
-        public void setSignature(String signature) {
-            this.signature = signature;
-        }
-
-        public String getThumb() {
-            return thumb;
-        }
-
-        public void setThumb(String thumb) {
-            this.thumb = thumb;
-        }
-
-        public String getTemple_follows() {
-            return temple_follows;
-        }
-
-        public void setTemple_follows(String temple_follows) {
-            this.temple_follows = temple_follows;
-        }
-
-        public String getMonk_follows() {
-            return monk_follows;
-        }
-
-        public void setMonk_follows(String monk_follows) {
-            this.monk_follows = monk_follows;
-        }
-
-        public String getBirthday() {
-            return birthday;
-        }
-
-        public void setBirthday(String birthday) {
-            this.birthday = birthday;
-        }
-
-        public int getSource() {
-            return source;
-        }
-
-        public void setSource(int source) {
-            this.source = source;
-        }
-
-        public int getGender() {
-            return gender;
-        }
-
-        public void setGender(int gender) {
-            this.gender = gender;
-        }
-
-        public String getGeneration() {
-            return generation;
-        }
-
-        public void setGeneration(String generation) {
-            this.generation = generation;
-        }
-
-        public int getPious() {
-            return pious;
-        }
-
-        public void setPious(int pious) {
-            this.pious = pious;
-        }
-
-        public int getLevel() {
-            return level;
-        }
-
-        public void setLevel(int level) {
-            this.level = level;
-        }
-
-        public String getProvince_id() {
-            return province_id;
-        }
-
-        public void setProvince_id(String province_id) {
-            this.province_id = province_id;
-        }
-
-        public String getCity_id() {
-            return city_id;
-        }
-
-        public void setCity_id(String city_id) {
-            this.city_id = city_id;
-        }
-
-        public String getDistrict_id() {
-            return district_id;
-        }
-
-        public void setDistrict_id(String district_id) {
-            this.district_id = district_id;
-        }
-
-        public String getBalance() {
-            return balance;
-        }
-
-        public void setBalance(String balance) {
-            this.balance = balance;
-        }
-
-        public String getLast_login() {
-            return last_login;
-        }
-
-        public void setLast_login(String last_login) {
-            this.last_login = last_login;
-        }
-
-        public int getStatusX() {
-            return statusX;
-        }
-
-        public void setStatusX(int statusX) {
-            this.statusX = statusX;
-        }
-
-        public String getCreated_at() {
-            return created_at;
-        }
-
-        public void setCreated_at(String created_at) {
-            this.created_at = created_at;
-        }
-
-        public String getUpdated_at() {
-            return updated_at;
-        }
-
-        public void setUpdated_at(String updated_at) {
-            this.updated_at = updated_at;
-        }
-
-        public String getLocation_name() {
-            return location_name;
-        }
-
-        public void setLocation_name(String location_name) {
-            this.location_name = location_name;
-        }
-
-        public int getPoints_difference() {
-            return points_difference;
-        }
-
-        public void setPoints_difference(int points_difference) {
-            this.points_difference = points_difference;
-        }
-
-        public int getIs_check_in() {
-            return is_check_in;
-        }
-
-        public void setIs_check_in(int is_check_in) {
-            this.is_check_in = is_check_in;
-        }
-
-        public String getToken() {
-            return token;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
-        }
+    public void setRefresh_token(String refresh_token) {
+        this.refresh_token = refresh_token;
     }
 }

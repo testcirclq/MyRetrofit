@@ -17,8 +17,9 @@ import rx.Observable;
 @Description("登录")
 public interface LoginApi   {
     @value
-    final String url="member/login";
+    final String url="auth/login";
     @POST(url)
-    @Headers({ "Accept:application/vnd.app.a1+json"})
+    @Headers({"Content-Type: application/json",
+            "Accept:application/vnd.app.a1+json"})
     public abstract Observable<String> onPostman(@Body RequestBody description);
 }

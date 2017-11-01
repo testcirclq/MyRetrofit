@@ -39,7 +39,7 @@ public abstract class BaseTask {
     private boolean isResult=true;
     public ObserverListener ob;
     private Integer[] HTTP_CODE_FAIL=new Integer[]{};//HTTP异常那些是失败的，
-    private Integer[] API_CODE_SUCCESS=new Integer[]{0};//后台返回成功代码，默认值为1个0
+    private Integer[] API_CODE_SUCCESS=new Integer[]{};//后台返回成功代码，默认值为1个0
     /**请求类型*/
     private String type;
     private Observable<String> mObservable;
@@ -176,9 +176,9 @@ public abstract class BaseTask {
                                 }
                             } catch (Exception e) {
                                 if(isLog()) {
-                                    Log.e(LogType.http, "报错" + decrypt);
+                                    Log.e(LogType.http, "报错" + e.getMessage());
                                 }
-                                BaseTask.this.onError("解析失败，请查看json格式");
+                                BaseTask.this.onError("解析失败，请查看json格式："+decrypt);
                             }
                         } else {
                             BaseTask.this.onError("s为空");
@@ -322,6 +322,8 @@ public abstract class BaseTask {
     public String onDecrypt(String json){return json;}
     /*成功条件，就是后台返回给你，根据字段判断是请求失败还是成功。通常都是用status字段，如果不是可以自己定义一个*/
     public boolean onSuccessCondition(Object object){
+        //如果没有设置成功条件，则默认请求成功
+        if(API_CODE_SUCCESS==null||API_CODE_SUCCESS.length==0){return true;}
         try {
             BaseModel baseResult = (BaseModel) object;
             for(int i=0;i<API_CODE_SUCCESS.length;i++){

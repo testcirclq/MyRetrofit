@@ -113,7 +113,12 @@ public abstract class BaseTask {
                                     Response<?> mResponse = httpException.response();
                                     String errorBody= mResponse.errorBody().string();
                                     String message=errorBody;
-                                    Object object=GsonUtils.fromJson(errorBody,returnClass());
+                                    Object object=null;
+                                    try{
+                                         object=GsonUtils.fromJson(errorBody,returnClass());
+                                    }catch (Exception e2){
+                                        object=GsonUtils.fromJson(errorBody,BaseModel.class);
+                                    }
                                     if(object!=null&&(BaseModel)object!=null&&((BaseModel) object).getMessage()!=null){
                                         message=((BaseModel) object).getMessage();
                                     }
@@ -123,14 +128,24 @@ public abstract class BaseTask {
                                     ProcessData(ObserverListener.STATUS.FAIL, mBaseModel);
                                 }catch (Exception e2){}
                             }else{
-                                Object object=GsonUtils.fromJson("{}",returnClass());
+                                Object object=null;
+                                try{
+                                     object=GsonUtils.fromJson("{}",returnClass());
+                                }catch (Exception e2){
+                                    object=GsonUtils.fromJson("{}",BaseModel.class);
+                                }
                                 mBaseModel= (BaseModel)object;
                                 mBaseModel.status=e.hashCode();
                                 mBaseModel.message= e.getMessage();
                                 ProcessData(ObserverListener.STATUS.ERROR,mBaseModel);
                             }
                         }else{
-                            Object object=GsonUtils.fromJson("{}",returnClass());
+                            Object object=null;
+                            try{
+                                object=GsonUtils.fromJson("{}",returnClass());
+                            }catch (Exception e2){
+                                object=GsonUtils.fromJson("{}",BaseModel.class);
+                            }
                             mBaseModel= (BaseModel)object;
                             mBaseModel.status=e.hashCode();
                             mBaseModel.message= e.getMessage();

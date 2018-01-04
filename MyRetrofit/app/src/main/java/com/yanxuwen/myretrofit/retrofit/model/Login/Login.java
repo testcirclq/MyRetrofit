@@ -16,9 +16,9 @@ public class Login extends MyBaseModel {
      * refresh_token : def50200e1d8957191c1f625dcf960b6bc6e45644d19e3a5f7a94f5ffddeb5273bf1963ab6c8ca834f63dca2fccb146451262c4ca0185f8eb891de6dbcd10054b9c6b4724fa6c2294b078d8cea0cc121f469079a18d2d6cee90516cdccd92d2e1ee2cbeb46ac6ac709f124da657bcbb800a876be4411c4101e90382ab1461a8ddca8f74673861e9aaae03eb79fe05ea265a3a4480c85fadb2faa791506adaff519145081e410ba066e223d3eac3e953e65ddf2fe48849f4f4f691144523b0c9f8a8acd8373f4066414a193cc697bb5d3fc8d69238b67c3c6d052fe68ff152455e29b69cbbe6cbd02c74dfcc7d48d240f9c1a8996732f52fc6523a6b7fa0ddf92d0eaa00b416b6ee456e35f9ca4a6e9631f5d259c69d04781db3d7ec86c8dbcb13d0cb2b2d2ce7671f6dbf3a25563029d60d7677074d7be825736f370471b7491bb6b08f2fbecbb220f47b497484566f6c06312c88b70a6899dfff9c71459513d
      */
 
-    private String token_type;
-    private int expires_in;
-    private String access_token;
+    private transient String token_type;
+    private transient int expires_in;
+    private transient String access_token;
     private String refresh_token;
 
     public String getToken_type() {

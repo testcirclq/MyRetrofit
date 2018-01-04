@@ -126,30 +126,14 @@ public abstract class BaseTask {
                                     mBaseModel.message=message;
                                     mBaseModel.status=code;
                                     ProcessData(ObserverListener.STATUS.FAIL, mBaseModel);
-                                }catch (Exception e2){}
-                            }else{
-                                Object object=null;
-                                try{
-                                     object=GsonUtils.fromJson("{}",returnClass());
                                 }catch (Exception e2){
-                                    object=GsonUtils.fromJson("{}",BaseModel.class);
+                                    setError(mBaseModel,e);
                                 }
-                                mBaseModel= (BaseModel)object;
-                                mBaseModel.status=e.hashCode();
-                                mBaseModel.message= e.getMessage();
-                                ProcessData(ObserverListener.STATUS.ERROR,mBaseModel);
+                            }else{
+                                setError(mBaseModel,e);
                             }
                         }else{
-                            Object object=null;
-                            try{
-                                object=GsonUtils.fromJson("{}",returnClass());
-                            }catch (Exception e2){
-                                object=GsonUtils.fromJson("{}",BaseModel.class);
-                            }
-                            mBaseModel= (BaseModel)object;
-                            mBaseModel.status=e.hashCode();
-                            mBaseModel.message= e.getMessage();
-                            ProcessData(ObserverListener.STATUS.ERROR,mBaseModel);
+                            setError(mBaseModel,e);
                         }
                         Gson gson=new Gson();
                         String json=gson.toJson(mBaseModel);
@@ -202,7 +186,18 @@ public abstract class BaseTask {
                 });
         }
     }
-
+    private void setError(BaseModel mBaseModel ,Throwable e){
+        Object object=null;
+        try{
+            object=GsonUtils.fromJson("{}",returnClass());
+        }catch (Exception e2){
+            object=GsonUtils.fromJson("{}",BaseModel.class);
+        }
+        mBaseModel= (BaseModel)object;
+        mBaseModel.status=e.hashCode();
+        mBaseModel.message= e.getMessage();
+        ProcessData(ObserverListener.STATUS.ERROR,mBaseModel);
+    }
     /**
      * 【注意】  object 的父类不一定是BaseModel，要根据接口而定，但是如果是ERROR或者FAIL为HTTP指定的错误（onHttpFailCondition的code）,则父类为BaseModel
      * 所以判断之前要先if(object instanceof BaseModel

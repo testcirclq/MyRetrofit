@@ -123,8 +123,8 @@ public abstract class BaseTask {
                                         message=((BaseModel) object).getMessage();
                                     }
                                     mBaseModel= (BaseModel)object;
-                                    mBaseModel.message=message;
-                                    mBaseModel.status=code;
+                                    mBaseModel.setMessage(message);
+                                    mBaseModel.setStatus(code+"");
                                     ProcessData(ObserverListener.STATUS.FAIL, mBaseModel);
                                 }catch (Exception e2){
                                     setError(mBaseModel,e);
@@ -138,9 +138,9 @@ public abstract class BaseTask {
                         Gson gson=new Gson();
                         String json=gson.toJson(mBaseModel);
                         if(isLog()) {
-                            Log.d(LogType.http, "【" + getPackageName(requestClass()) + "】返回【接口描述：" + AnnotationUtils.getAnnotationDescription(getBaseApiClass()) + " ▎" +
+                            Log.e(LogType.http, "【" + getPackageName(requestClass()) + "】返回【接口描述：" + AnnotationUtils.getAnnotationDescription(getBaseApiClass()) + " ▎" +
                                     "url：" + getUrl() + "】");
-                            Log.d(LogType.http, "【" + getPackageName(requestClass()) + "】返回:" + json);
+                            Log.e(LogType.http, "【" + getPackageName(requestClass()) + "】返回:" + json);
                         }
                     }
 
@@ -149,7 +149,7 @@ public abstract class BaseTask {
                         //如果有加密，则事先要解密下,由于暂时没加密，则先用String decrypt=str;替代
                         String decrypt = onDecrypt(str);
                         if(isLog()) {
-                            Log.d(LogType.http, "【" + getPackageName(requestClass()) + "】返回【接口描述：" + AnnotationUtils.getAnnotationDescription(getBaseApiClass()) + " ▎" +
+                            Log.e(LogType.http, "【" + getPackageName(requestClass()) + "】返回【接口描述：" + AnnotationUtils.getAnnotationDescription(getBaseApiClass()) + " ▎" +
                                     "url：" + getUrl() + "】");
                         }
                         try {
@@ -158,7 +158,7 @@ public abstract class BaseTask {
                         } catch (JSONException e) {
                         }
                         if(isLog()) {
-                            Log.d(LogType.http, "【" + getPackageName(requestClass()) + "】返回:" + decrypt);
+                            Log.e(LogType.http, "【" + getPackageName(requestClass()) + "】返回:" + decrypt);
                         }
                         if (decrypt != null) {
                             try {
@@ -194,8 +194,8 @@ public abstract class BaseTask {
             object=GsonUtils.fromJson("{}",BaseModel.class);
         }
         mBaseModel= (BaseModel)object;
-        mBaseModel.status=e.hashCode();
-        mBaseModel.message= e.getMessage();
+        mBaseModel.setStatus(e.hashCode()+"");
+        mBaseModel.setMessage(e.getMessage());
         ProcessData(ObserverListener.STATUS.ERROR,mBaseModel);
     }
     /**
@@ -257,9 +257,9 @@ public abstract class BaseTask {
         Gson gson=new Gson();
         String json=gson.toJson(requestClass());
         if(isLog()) {
-            Log.d(LogType.http, "【" + getPackageName(requestClass()) + "】请求【接口描述：" + AnnotationUtils.getAnnotationDescription(getBaseApiClass()) + " ▎" +
+            Log.e(LogType.http, "【" + getPackageName(requestClass()) + "】请求【接口描述：" + AnnotationUtils.getAnnotationDescription(getBaseApiClass()) + " ▎" +
                     "url：" + getUrl() + "】");
-            Log.d(LogType.http, "【" + getPackageName(requestClass()) + "】请求:" + json);
+            Log.e(LogType.http, "【" + getPackageName(requestClass()) + "】请求:" + json);
         }
         //执行加密
         if(isEncrypt()){
@@ -337,7 +337,9 @@ public abstract class BaseTask {
         try {
             BaseModel baseResult = (BaseModel) object;
             for(int i=0;i<API_CODE_SUCCESS.length;i++){
-                if (baseResult.getStatus() == API_CODE_SUCCESS[i]) {
+                int status=0;
+                try{status=Integer.parseInt(baseResult.getStatus());}catch (Exception e){}
+                if (status == API_CODE_SUCCESS[i]) {
                     return true;
                 }
             }

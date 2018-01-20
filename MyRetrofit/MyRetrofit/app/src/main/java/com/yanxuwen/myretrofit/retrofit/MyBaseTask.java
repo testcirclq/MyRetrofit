@@ -120,7 +120,9 @@ public class MyBaseTask extends BaseTask {
     public boolean ProcessingData(ObserverListener.STATUS status, Object object){
         if(object instanceof MyBaseModel){
             MyBaseModel mMyBaseModel=(MyBaseModel)object;
-            if(mMyBaseModel.getStatus()==-1000){
+            int status2=0;
+            try{status2=Integer.parseInt(mMyBaseModel.getStatus());}catch (Exception e){}
+            if(status2==-1000){
                 //执行你要的操作，如：跳转登录
                 return false;
             }

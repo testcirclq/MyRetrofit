@@ -1,7 +1,7 @@
 #前言
 Retrofit的简洁，用过的人都是赞不绝口，然而我们的目标是更加简洁，不同请求类型，只需要粘贴复制即可。
 #依赖
-   compile 'com.yanxuwen.retrofit:retrofit:1.0.7'
+   compile 'com.yanxuwen.retrofit:retrofit:1.1.6'
 #目录结构
 
 ![image.png](http://upload-images.jianshu.io/upload_images/6835615-13e6e1fc2a36f1c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

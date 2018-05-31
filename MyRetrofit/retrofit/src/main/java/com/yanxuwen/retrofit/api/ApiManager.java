@@ -199,21 +199,17 @@ public class ApiManager {
         API_BASE_URL=baseUrl;
         /**返回对象*/
          mBuilder = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create());
         /**返回对象并且使用rxjava技术*/
          mBuilder2 = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create());
 
         /**返回String*/
          mStringBuilder = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
                 .addConverterFactory(StringConverterFactory.create());
         /**返回json并且使用rxjava技术*/
          mStringBuilder2 = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(StringConverterFactory.create());
     }
@@ -221,8 +217,7 @@ public class ApiManager {
     public static <T> T createServiceBuilder(Class<T> serviceClass,String baseUrl,Context context,HttpType mHttpType) {
         Retrofit retrofit=null;
         if (Patterns.WEB_URL.matcher(baseUrl).matches()) {
-            API_BASE_URL = baseUrl;
-            mBuilder.baseUrl(API_BASE_URL);
+            mBuilder.baseUrl(baseUrl);
             retrofit = mBuilder.client(getOkHttpClient(context,mHttpType)).build();
         }else{
             Log.e(LogType.http,"非法URL");
@@ -234,8 +229,7 @@ public class ApiManager {
     public static <T> T createServiceBuilder2(Class<T> serviceClass,String baseUrl,Context context,HttpType mHttpType) {
         Retrofit retrofit=null;
         if (Patterns.WEB_URL.matcher(baseUrl).matches()) {
-            API_BASE_URL = baseUrl;
-            mBuilder2.baseUrl(API_BASE_URL);
+            mBuilder2.baseUrl(baseUrl);
             retrofit= mBuilder2.client(getOkHttpClient(context,mHttpType)).build();
         }else{
             Log.e(LogType.http,"非法URL");
@@ -247,8 +241,7 @@ public class ApiManager {
     public static <T> T createServiceStringBuilder(Class<T> serviceClass,String baseUrl,Context context,HttpType mHttpType) {
         Retrofit retrofit=null;
         if (Patterns.WEB_URL.matcher(baseUrl).matches()) {
-            API_BASE_URL=baseUrl;
-            mStringBuilder.baseUrl(API_BASE_URL);
+            mStringBuilder.baseUrl(baseUrl);
             retrofit = mStringBuilder.client(getOkHttpClient(context,mHttpType)).build();
         }else{
             Log.e(LogType.http,"非法URL");
@@ -260,8 +253,7 @@ public class ApiManager {
     public static <T> T createServiceStringBuilder2(Class<T> serviceClass,String baseUrl,Context context,HttpType mHttpType, final Map<String,String> headers) {
         Retrofit retrofit = null;
         if (Patterns.WEB_URL.matcher(baseUrl).matches()) {
-            API_BASE_URL = baseUrl;
-            mStringBuilder2.baseUrl(API_BASE_URL);
+            mStringBuilder2.baseUrl(baseUrl);
             retrofit = mStringBuilder2.client(getOkHttpClient(context,mHttpType,headers)).build();
         } else{
             Log.e(LogType.http,"非法URL");

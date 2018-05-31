@@ -28,5 +28,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':retrofit')
     compile 'com.yanxuwen.loadview:loadview:1.0.5'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+
 
 }
